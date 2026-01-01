@@ -1,0 +1,56 @@
+# Model Configuration
+
+# Primary model for embeddings
+primary_model:
+  name: openai/clip-vit-large-patch14
+  type: clip
+  dimension: 768
+  cache_dir: ./models
+  device: auto  # auto, cuda, cpu, mps
+
+# Alternative models (for experimentation)
+available_models:
+  - name: openai/clip-vit-base-patch32
+    type: clip
+    dimension: 512
+    description: Faster, smaller model
+    
+  - name: laion/CLIP-ViT-H-14-laion2B-s32B-b79K
+    type: clip
+    dimension: 1024
+    description: Highest quality, slower
+    
+  - name: apple/MobileCLIP-S2-OpenCLIP
+    type: clip
+    dimension: 512
+    description: Lightweight for mobile/edge devices
+
+# Model inference settings
+inference:
+  batch_size: 32
+  max_batch_size: 64
+  num_workers: 4
+  use_fp16: false  # Half precision for faster inference
+  use_onnx: false  # Use ONNX runtime for optimization
+  
+# Image preprocessing
+preprocessing:
+  target_size: 224  # or 336 for larger models
+  interpolation: bicubic  # bicubic, bilinear, lanczos
+  normalize: true
+  center_crop: true
+
+# Text preprocessing
+text_processing:
+  max_length: 77  # CLIP default
+  truncation: true
+  add_special_tokens: true
+  
+# Optimization settings
+optimization:
+  compile_model: false  # PyTorch 2.0+ compile
+  use_gradient_checkpointing: false
+  quantization:
+    enabled: false
+    method: dynamic  # dynamic, static, qat
+    dtype: int8

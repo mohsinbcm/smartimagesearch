@@ -1,0 +1,77 @@
+# Search Configuration
+
+# Search behavior
+search:
+  default_top_k: 20
+  max_top_k: 100
+  similarity_metric: cosine  # cosine, euclidean, dot_product
+  similarity_threshold: 0.3  # Minimum similarity score
+  enable_reranking: true
+  diversify_results: false
+
+# Query processing
+query_processing:
+  enable_preprocessing: true
+  lowercase: true
+  remove_special_chars: false
+  expand_queries: false  # Expand with synonyms
+  spell_check: false
+  
+# Query expansion (if enabled)
+query_expansion:
+  max_expansions: 3
+  similarity_threshold: 0.8
+  common_expansions:
+    cat: [cats, kitten, kittens, feline]
+    dog: [dogs, puppy, puppies, canine]
+    car: [cars, vehicle, automobile]
+    sunset: [sunrise, dusk, dawn, twilight]
+
+# Filtering options
+filters:
+  enable_metadata_filtering: true
+  available_filters:
+    - date_range
+    - file_format
+    - image_size
+    - aspect_ratio
+    - file_size
+    - location
+    - camera_model
+    - tags
+    
+# Result ranking
+ranking:
+  primary_score_weight: 0.7  # Vector similarity
+  metadata_score_weight: 0.2  # Metadata match
+  recency_score_weight: 0.1  # Recent images boost
+  
+# Caching
+cache:
+  enabled: true
+  backend: memory  # memory, redis, disk
+  ttl: 3600  # Time to live in seconds
+  max_cache_size: 1000  # Number of queries to cache
+  cache_embeddings: true
+  cache_results: true
+
+# Performance
+performance:
+  use_approximate_search: true  # Use ANN instead of exact search
+  index_type: flat  # flat, ivf, hnsw
+  nprobe: 10  # For IVF index
+  ef_search: 50  # For HNSW index
+  
+# Hybrid search (combine with metadata)
+hybrid_search:
+  enabled: false
+  text_search_weight: 0.7
+  metadata_search_weight: 0.3
+  
+# Advanced features
+advanced:
+  enable_multi_modal: true  # Image + text search
+  enable_negative_search: false  # Exclude certain concepts
+  enable_feedback_learning: false  # Learn from user clicks
+  deduplicate_results: true
+  duplicate_threshold: 0.95

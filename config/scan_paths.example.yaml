@@ -1,0 +1,66 @@
+# Scan Configuration
+
+# Directories to scan for images
+scan_paths:
+  - path: ~/Pictures
+    recursive: true
+    enabled: true
+  - path: ~/Downloads
+    recursive: false
+    enabled: false
+  - path: ~/Documents
+    recursive: true
+    enabled: false
+  # Add more paths as needed
+  # - path: /path/to/your/images
+  #   recursive: true
+  #   enabled: true
+
+# Directories to exclude from scanning
+exclude_paths:
+  - "*/node_modules/*"
+  - "*/venv/*"
+  - "*/.*"  # Hidden directories
+  - "*/.git/*"
+  - "*/cache/*"
+  - "*/temp/*"
+  - "*/tmp/*"
+  - "*/__pycache__/*"
+  - "*/build/*"
+  - "*/dist/*"
+  - "*/Library/*"  # macOS
+  - "*/AppData/*"  # Windows
+  - "*/.Trash/*"
+  - "*/System Volume Information/*"
+  - "*/$RECYCLE.BIN/*"
+
+# File patterns to exclude
+exclude_patterns:
+  - "*.tmp"
+  - "*.temp"
+  - "*.bak"
+  - "*.cache"
+  - "thumbnail_*"
+  - ".*"  # Hidden files
+
+# Supported image formats
+supported_formats:
+  - jpg
+  - jpeg
+  - png
+  - gif
+  - bmp
+  - tiff
+  - tif
+  - webp
+  - heic
+  - heif
+
+# Scanner settings
+settings:
+  follow_symlinks: false
+  skip_hidden_files: true
+  max_file_size_mb: 100  # Skip files larger than this
+  min_image_size: 50  # Minimum width/height in pixels
+  scan_batch_size: 1000  # Process files in batches
+  progress_update_interval: 100  # Update progress every N files
